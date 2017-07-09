@@ -30,6 +30,11 @@ These notes apply only to my setup (YMMV):
 bazel-bin/tensorflow/examples/label_image/label_image --graph=/tmp/output_graph.pb --labels=/tmp/output_labels.txt --output_layer=final_result --input_layer=Mul --image=$HOME/<path to image>.jpg
 ```
 
+### Walkthrough
+
+* https://codelabs.developers.google.com/codelabs/tensorflow-for-poets
+* https://petewarden.com/2016/09/27/tensorflow-for-mobile-poets/
+
 ## TensorBox
 
 * Install based on instructions: https://github.com/TensorBox/TensorBox
