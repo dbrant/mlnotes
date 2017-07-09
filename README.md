@@ -35,6 +35,11 @@ bazel-bin/tensorflow/examples/label_image/label_image --graph=/tmp/output_graph.
 * https://codelabs.developers.google.com/codelabs/tensorflow-for-poets
 * https://petewarden.com/2016/09/27/tensorflow-for-mobile-poets/
 
+### Android samples
+
+* https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android
+* https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/android/README.md
+
 ## TensorBox
 
 * Install based on instructions: https://github.com/TensorBox/TensorBox
