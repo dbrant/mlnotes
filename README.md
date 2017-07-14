@@ -35,6 +35,36 @@ bazel-bin/tensorflow/examples/label_image/label_image --graph=/tmp/output_graph.
 * https://codelabs.developers.google.com/codelabs/tensorflow-for-poets
 * https://petewarden.com/2016/09/27/tensorflow-for-mobile-poets/
 
+To retrain (on Inception V3 by default):
+```
+bazel build tensorflow/examples/image_retraining:retrain
+bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir [directory]
+```
+The output graph is written to `/tmp` by default, or use `--output_graph` and `--output_labels` to
+specify custom output locations. It creates a .pb file, and a .txt file that contains the auto-generated labels.
+
+To verify:
+```
+bazel-bin/tensorflow/examples/label_image/label_image \
+--graph=/tmp/output_graph.pb --labels=/tmp/output_labels.txt \
+--input_layer=Mul --output_layer=final_result \
+--image=[image.jpg]
+```
+To strip unused Ops (i.e. the DecodeJpeg op) for use on mobile device:
+```
+bazel build tensorflow/python/tools:strip_unused
+bazel-bin/tensorflow/python/tools/strip_unused --input_graph output_graph.pb --output_graph foo.pb --input_node_names "Mul" --output_node_names "final_result" --input_binary true
+```
+
+To retrain with a MobileNet model (faster than Inception (with a slight decrease in accuracy),
+and therefore better for mobile):
+```
+bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir [directory] \
+--architecture mobilenet_1.0_224
+```
+For a list of MobileNet revisions, see https://research.googleblog.com/2017/06/mobilenets-open-source-models-for.html
+
+
 ### Android samples
 
 * https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android
