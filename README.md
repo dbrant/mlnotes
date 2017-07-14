@@ -62,8 +62,27 @@ and therefore better for mobile):
 bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir [directory] \
 --architecture mobilenet_1.0_224
 ```
-For a list of MobileNet revisions, see https://research.googleblog.com/2017/06/mobilenets-open-source-models-for.html
+For a list of MobileNet variations, see https://research.googleblog.com/2017/06/mobilenets-open-source-models-for.html
 
+#### Model parameters
+
+For Inception V3:
+```
+input_layer = Mul
+input_size = 299
+input_mean = 128
+input_std = 128
+output_layer = final_result
+```
+
+For MobileNet:
+```
+input_layer = input
+input_size = [last number of model architecture]
+input_mean = 127.5
+input_std = 127.5
+output_layer = final_result
+```
 
 ### Android samples
 
