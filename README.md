@@ -21,17 +21,9 @@ These notes apply only to my setup (YMMV):
 * Install with virtualenv, according to documentation: https://www.tensorflow.org/install/install_linux
 * If you see errors related to `mock`, go outside of virtualenv, and install mock globally: `sudo pip install --upgrade mock`
 
-## Image retraining demo
+## Image retraining
 
 * https://www.tensorflow.org/tutorials/image_retraining
-* After training complete, when running `label_image`, use the following parameters:
-
-```
-bazel-bin/tensorflow/examples/label_image/label_image --graph=/tmp/output_graph.pb --labels=/tmp/output_labels.txt --output_layer=final_result --input_layer=Mul --image=$HOME/<path to image>.jpg
-```
-
-### Walkthrough
-
 * https://codelabs.developers.google.com/codelabs/tensorflow-for-poets
 * https://petewarden.com/2016/09/27/tensorflow-for-mobile-poets/
 
@@ -50,10 +42,19 @@ bazel-bin/tensorflow/examples/label_image/label_image \
 --input_layer=Mul --output_layer=final_result \
 --image=[image.jpg]
 ```
+
 To strip unused Ops (i.e. the DecodeJpeg op) for use on mobile device:
 ```
 bazel build tensorflow/python/tools:strip_unused
 bazel-bin/tensorflow/python/tools/strip_unused --input_graph output_graph.pb --output_graph foo.pb --input_node_names "Mul" --output_node_names "final_result" --input_binary true
+```
+
+To optimize for inference (which also strips unused Ops):
+```
+bazel build tensorflow/python/tools:optimize_for_inference
+bazel-bin/tensorflow/python/tools/optimize_for_inference \
+--input=[input.pb] --output=[output.pb] \
+--input_names=Mul --output_names=final_result
 ```
 
 To retrain with a MobileNet model (faster than Inception (with a slight decrease in accuracy),
