@@ -35,6 +35,13 @@ bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir [directory]
 The output graph is written to `/tmp` by default, or use `--output_graph` and `--output_labels` to
 specify custom output locations. It creates a .pb file, and a .txt file that contains the auto-generated labels.
 
+If you see errors related to `__doc__`, remove the version of `enum` that you installed with pip, and instead
+install this compatibility version of enum.
+```
+sudo pip remove enum
+sudo apt-get install python-enum34
+```
+
 To verify:
 ```
 bazel-bin/tensorflow/examples/label_image/label_image \
